@@ -12,5 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('tampilanawal.index');
 });
+
+Route::get('/barang', function () {
+    return view('barang.barang');
+});
+
+
+Route::get('/user', 'UserController@kirimArray');
+
+
