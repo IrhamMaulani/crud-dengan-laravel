@@ -9,13 +9,101 @@ use App\Users;
 class UserController extends Controller
 {
 
-    public function kirimArray()
+    public function index()
     {
         $users = Users::all();
         $title = "halo";
 
         return view('user.user',['users' => $users , 'title' => $title]);
     }
+
+    public function show($id)
+    {
+        
+       
+       // $users = Users::where('id_user', $id) -> get();
+       $users = Users::find($id);
+
+       
+
+        return view('user.detailuser',['user' => $users ]);
+    }
+
+    public function create()
+    {       
+
+        return view('user.createuser');
+    }
+
+    public function store(Request $request)
+    {
+        
+       
+        $users = new Users;
+
+        $users->nama_user = $request->namauser;
+        $users->nomor_telepon_user = $request->nomorteleponuser;
+        $users->jenis_kelamin = $request->jeniskelamin;
+
+        $users->save();
+       
+
+        return redirect('user');
+    }
+
+
+
+
+
+    public function edit($id)
+    {
+        
+       
+        $users = Users::find($id);
+      
+
+       
+
+        return view('user.edituser',['user' => $users ]);
+    }
+
+    public function update(Request $request , $id)
+    {
+        
+       
+      
+        $users = Users::find($id);
+
+        $users->nama_user = $request->namauser;
+        $users->nomor_telepon_user = $request->nomorteleponuser;
+        $users->jenis_kelamin = $request->jeniskelamin;
+
+        $users->save();
+      
+
+       
+
+        return redirect('user');
+    }
+
+    public function destroy($id)
+    {
+        
+       
+      
+        $users = Users::find($id);
+
+       
+
+        $users->delete();
+      
+
+       
+
+        return redirect('user');
+    }
+
+   
 
 
     

@@ -20,6 +20,20 @@ Route::get('/barang', function () {
 });
 
 
-Route::get('/user', 'UserController@kirimArray');
+Route::get('/user', 'UserController@index');
+
+Route::get('/user/create', 'UserController@create');
+Route::post('/user', 'UserController@store');
+
+
+Route::get('/user/{id}', 'UserController@show');
+
+Route::get('/user/{id}/edit', 'UserController@edit');
+
+Route::put('/user/{id}', 'UserController@update');
+
+Route::delete('/user/{id}', 'UserController@destroy');
+
+
 
 
