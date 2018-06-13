@@ -1,6 +1,5 @@
 
 
-
 // READ records
 function readRecords() {
       
@@ -15,8 +14,7 @@ function readRecords() {
 $(document).ready(function(){
      
       $("#btn-save").click(function(){
-            $('#formBody').show();
-            $("#btn-save").show();
+
 
 $.ajax({
       method: "POST",
@@ -34,6 +32,7 @@ $.ajax({
        readRecords();
         $("#sukses").show();
         $("#sukses").html(msg.success);
+        $('#isiForm')[0].reset();
         
       });
 });
@@ -43,40 +42,132 @@ $(document).on('click', '#btn-add', function(){
       $("#btn-save").show();
       $('#formBody').show();
       $('#table-untuk-detail').hide();
+      $('#btn-update').hide();
+      $('#isiForm')[0].reset();
       
 });
 
 //show data
 
 
+
+
 $(document).on('click', '.detailBarang', function(){
       var id = $(this).attr("id");
      $("#btn-save").hide();
+     $("#btn-update").hide();
   
      
 $.ajax({
       method: "GET",
-      url: "/barang/id",
+      url: "/barang/" + id,
+      data: { 
+            id      :    id         
+       }    
+    })
+      .done(function( data ) {
+            $('#formBody').hide();
+            $('#table-untuk-detail').show();
+            $('#detailNamaBarang').html(data.nama_barang);
+            //$('#namaBarang').html(data.nama_barang);
+            $('#detailJenisBarang').html(data.jenis_barang);
+            $('#detailHargaBarang').html(data.harga_barang);
+            $('#myModal').modal('show');   
+      });
+});
+
+
+$(document).on('click', '.editBarang', function(){
+      var id = $(this).attr("id");
+     $("#btn-save").show();
+      $('#formBody').show();
+      $('#table-untuk-detail').hide();
+      $('#btn-save').hide();
+      $('#btn-update').show();
+  
+     
+$.ajax({
+      method: "GET",
+      url: "/barang/"+ id,
       data: { 
             id      :    id
             
        }    
     })
       .done(function( data ) {
-            $('#formBody').hide();
-            $('#table-untuk-detail').show();
-            console.log( data);
-            console.log( data.nama_barang);
-            $('#detailNamaBarang').html(data.nama_barang);
-            //$('#namaBarang').html(data.nama_barang);
-            $('#detailJenisBarang').html(data.jenis_barang);
-            $('#detailHargaBarang').html(data.harga_barang);
+            //$('#formBody').hide();
+            //$('#table-untuk-detail').show();
+            
+            $('#idBarang').val(data.id);
+            $('#namaBarang').val(data.nama_barang);
+            $('#jenisBarang').val(data.jenis_barang);
+            $('#hargaBarang').val(data.harga_barang);
             $('#myModal').modal('show');
+           
+            
             
         
       });
 });
 
+$(document).on('click', '#btn-update      ', function(){
+      var id =  $("#idBarang").val();
+      
+      console.log(id);
+
+
+      $.ajax({
+            method: "PUT",
+            url: "/barang/" + id,
+            data: { 
+
+                 
+                  _token         : $("#_token").val()   , 
+                  namaBarang     : $("#namaBarang").val(), 
+                  jenisBarang    : $("#jenisBarang").val(),
+                  hargaBarang    : $("#hargaBarang").val()
+             }    
+          })
+            .done(function( msg ) {
+              console.log(msg);
+              $('#myModal').modal('hide')
+             readRecords();
+              $("#sukses").show();
+              $("#sukses").html(msg.success);
+              $('#isiForm')[0].reset();
+              
+            });
+
+
+});
+
+$(document).on('click', '.hapusBarang', function(){
+      var id = $(this).attr("id");
+      var token = $(this).data("token");
+     $("#btn-save").hide();
+  
+     
+$.ajax({
+      method: "POST",
+      url: "/barang/" + id,
+      data: { 
+            _token      :     token,
+            _method     :     "delete"       
+       }    
+    })
+      .done(function( data ) {
+            readRecords();
+            $("#sukses").show();
+              $("#sukses").html(data.success);
+            //$('#formBody').hide();
+            //$('#table-untuk-detail').show();
+            //$('#detailNamaBarang').html(data.nama_barang);
+            //$('#namaBarang').html(data.nama_barang);
+            //$('#detailJenisBarang').html(data.jenis_barang);
+            //$('#detailHargaBarang').html(data.harga_barang);
+            //$('#myModal').modal('show');   
+      });
+});
       
       
 
@@ -89,20 +180,4 @@ $(document).ready(function () {
   });
 
 
-  /*
-    $.ajax({
-         url:"barang/show",
-         method:"POST",
-         data:{_token         :  $("#_token").val(), 
-               employee_id:employee_id
-            },
-         success:function(data){
-               console.log(data);
-          $('#namaBarang').html(data.nama_barang);
-          $('#jenisBarang').html(data.jenis_barang);
-          $('#hargaBarang').html(data.harga_barang);
-          $('#myModal').modal('show');
-          $("#btn-save").hide();
-         }
-        });
-  */
+  

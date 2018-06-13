@@ -42,9 +42,15 @@ Route::get('/barang', function () {
 
 
 Route::get('/barang/index', 'BarangController@index');
+
 Route::post('/barang/post', 'BarangController@store');
 
 Route::get('/barang/{id}', 'BarangController@show');
+
+Route::put('/barang/{id}', 'BarangController@update');
+
+Route::delete('/barang/{id}', 'BarangController@destroy');
+
 //End Barang
 
 

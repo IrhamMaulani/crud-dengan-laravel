@@ -28,6 +28,7 @@
 <div id="formBody">
 <form id="isiForm" name="isiForm" class="form-horizontal"   >
 
+    <input type="hidden" name="idBarang" id="idBarang">
     <div class="form-group">
         <label for="namaBarang">Nama Barang:</label>
       <input type="text" class="form-control" name="namaBarang" id="namaBarang"  >
@@ -72,5 +73,6 @@
 @endsection
 
 @section('isiFooter')
-<button type="button" class="btn btn-primary" id="btn-save" >Save changes</button>
+<button type="button" class="btn btn-primary" id="btn-save"  >Save </button>
+<button type="button" class="btn btn-primary" id="btn-update" style="display:none" >Update </button>
 @endsection

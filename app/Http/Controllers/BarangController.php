@@ -20,9 +20,9 @@ class BarangController extends Controller
     
     {
         
-        $coba=$_GET['id'];       
+       // $coba=$_POST['id'];       
        // $users = Users::where('id_user', $id) -> get();
-       $barangs = Barang::find($coba);
+       $barangs = Barang::find($id);
 
        
 
@@ -46,4 +46,37 @@ class BarangController extends Controller
 
         return response()->json(['success'=>'Data is successfully added']);
     }
+
+    public function update(Request $request,$id)
+    {  
+       
+        $barangs = Barang::find($id);
+
+        $barangs->nama_barang = $request->namaBarang;
+        $barangs->jenis_barang = $request->jenisBarang;
+        $barangs->harga_barang = $request->hargaBarang;
+
+        $barangs->save();
+       
+
+        return response()->json(['success'=>'Data is successfully edited']);
+      
+       
+    }
+
+    public function destroy($id)
+    {  
+       
+        $barangs = Barang::find($id);
+
+       
+
+        $barangs->delete();
+       
+
+        return response()->json(['success'=>'Data is successfully deleted']);
+      
+       
+    }
+
 }
