@@ -2,14 +2,24 @@
 
 @section('content')
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <form action="/user" method="POST">
     <div class="form-group">
       <label for="namauser">Nama User:</label>
-      <input type="text" class="form-control" name="namauser">
+    <input type="text" class="form-control" name="namauser" value="{{ old('namauser') }}">
     </div>
     <div class="form-group">
       <label for="nomorteleponuser">Nomor Telepon User:</label>
-      <input type="number" class="form-control"  name="nomorteleponuser">
+      <input type="number" class="form-control"  name="nomorteleponuser" value="{{ old('namauser') }}">
     </div>
 
     <div class="form-check">

@@ -2,7 +2,14 @@
 
 @section('content')
 
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
 
+
+<br><br>
 
 
 <td><a  class="btn btn-info" href="/user/create" role="button">Add</a></td>
@@ -26,15 +33,15 @@
                 <td>{{$user -> nama_user}}</td>
                 <td><a  class="btn btn-info" href="/user/{{ $user ->id_user }}" role="button">Detail</a></td>
                 <td><a  class="btn btn-primary" href="/user/{{ $user ->id_user }}/edit" role="button" >Update</a></td> 
-                <td><form action="/user/{{ $user -> id_user }}" method="POST">
+                <td><form action="/user/{{ $user -> id_user }}" method="POST" >
                 
                 
                       <!--token csrf untuk validasi--> 
                       @csrf
                 
                       <!--Untuk memberitahu bahwa ini menggunakan method Delete-->
-                      <input type="hidden" name="_method" value="delete">
-                    <button type="submit" class="btn btn-primary" name="submit" value="delete">Delete</button>
+                      <input type="hidden" name="_method" value="delete" >
+                    <button type="submit" class="btn btn-primary" name="submit" value="delete"  >Delete</button>
                   </form></td> 
                
                 

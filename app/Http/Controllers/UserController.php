@@ -37,7 +37,12 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        
+        $validatedData = $request->validate([
+            'namauser' => 'required',
+            'nomorteleponuser' => 'required',
+            'jeniskelamin' => 'required'
+        ]);
+    
        
         $users = new Users;
 
@@ -48,7 +53,7 @@ class UserController extends Controller
         $users->save();
        
 
-        return redirect('user');
+        return redirect('user')->with('message', 'Data telah di Insert');
     }
 
 
@@ -83,7 +88,7 @@ class UserController extends Controller
 
        
 
-        return redirect('user');
+        return redirect('user')->with('message', 'Data telah di Update');
     }
 
     public function destroy($id)
@@ -100,7 +105,7 @@ class UserController extends Controller
 
        
 
-        return redirect('user');
+        return redirect('user')->with('message', 'Data telah di Hapus');
     }
 
    

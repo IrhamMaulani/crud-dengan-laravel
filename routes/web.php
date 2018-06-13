@@ -11,15 +11,14 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('tampilanawal.index');
 });
 
-Route::get('/barang', function () {
-    return view('barang.barang');
-});
 
 
+//User
 Route::get('/user', 'UserController@index');
 
 Route::get('/user/create', 'UserController@create');
@@ -33,7 +32,20 @@ Route::get('/user/{id}/edit', 'UserController@edit');
 Route::put('/user/{id}', 'UserController@update');
 
 Route::delete('/user/{id}', 'UserController@destroy');
+//End User
 
+//Barang
+
+Route::get('/barang', function () {
+    return view ('barang.barang');
+});
+
+
+Route::get('/barang/index', 'BarangController@index');
+Route::post('/barang/post', 'BarangController@store');
+
+Route::get('/barang/{id}', 'BarangController@show');
+//End Barang
 
 
 
