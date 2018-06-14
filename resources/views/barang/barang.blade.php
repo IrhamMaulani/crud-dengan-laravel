@@ -6,7 +6,13 @@
 @extends('layouts.template_modal')
 
 <div  class="alert alert-success" id="sukses" style="display:none" >
+  
 </div>
+
+
+<script>
+  $(".alert").alert();
+</script>
 
 
  <button type="button" class="btn btn-primary" id="btn-add" data-toggle="modal" data-target="#myModal">

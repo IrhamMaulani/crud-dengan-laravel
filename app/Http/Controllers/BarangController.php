@@ -67,11 +67,11 @@ class BarangController extends Controller
     public function destroy($id)
     {  
        
-        $barangs = Barang::find($id);
+        //$barangs = Barang::find($id);
 
        
 
-        $barangs->delete();
+        Barang::destroy($id);
        
 
         return response()->json(['success'=>'Data is successfully deleted']);

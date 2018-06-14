@@ -1,3 +1,12 @@
+<style>
+
+.pagination{
+    margin-left: 5px;
+}
+
+
+</style>
+
 @extends('layouts.template_html')
 
 @section('content')
@@ -47,9 +56,10 @@
                 
             </tr>
             @endforeach
+         
         </tbody>
     </table>
-
+   <div class="pagination"> {{ $users->links() }}   </div>
 
  
 

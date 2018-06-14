@@ -145,8 +145,17 @@ $(document).on('click', '.hapusBarang', function(){
       var id = $(this).attr("id");
       var token = $(this).data("token");
      $("#btn-save").hide();
-  
-     
+
+     swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this Data!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+                
 $.ajax({
       method: "POST",
       url: "/barang/" + id,
@@ -167,6 +176,15 @@ $.ajax({
             //$('#detailHargaBarang').html(data.harga_barang);
             //$('#myModal').modal('show');   
       });
+     
+            
+        swal("Your Data Deleted", {
+          icon: "success",
+        });
+      } 
+    });
+  
+ 
 });
       
       

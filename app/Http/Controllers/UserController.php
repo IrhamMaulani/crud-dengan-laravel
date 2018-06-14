@@ -11,7 +11,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = Users::all();
+        $users = Users::paginate(5);
         $title = "halo";
 
         return view('user.user',['users' => $users , 'title' => $title]);
